@@ -24,6 +24,9 @@ Operations on ISO File or DVD-Drive directly
 * lsdvd
 * dvdbackup
 * ffmpeg
+* import subprocess
+* import sys
+* from shutil import which
 
 ### Installing
 
@@ -48,8 +51,9 @@ ex. Gerd Grimmen (F.KU)
 ## Version History
 
 * 0.1
-    * Nothing here to see
+    * Initialize project structure
+    * added commands help, version, info, check
 
 ## License
 
-This project is licensed under the GPL-v2.0 License - see the LICENSE.md file for details
+The Unlicense. Feel free to use or change it how you need.
