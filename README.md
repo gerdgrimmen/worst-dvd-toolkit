@@ -50,6 +50,8 @@ ex. Gerd Grimmen (F.KU)
 
 ## Version History
 
+* 0.2
+    * added command backup to copy a dvd in a given drive
 * 0.1
     * Initialize project structure
     * added commands help, version, info, check
