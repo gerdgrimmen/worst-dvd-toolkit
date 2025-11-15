@@ -2,7 +2,7 @@ import subprocess
 import sys
 from shutil import which
 
-version = "0.2.0"
+version = "0.3.0"
 
 def arguments_guard():
     if len(sys.argv) < 2:
@@ -28,6 +28,10 @@ def check_arguments_structure(command):
             if command_guard("backup", 3):
                 dvdbackup = subprocess.run(["dvdbackup","-i", sys.argv[2], "-M", "-p"], capture_output=True, text=True)
                 print(dvdbackup.stdout)
+        case "convert":
+            if command_guard("convert", 3):
+                ffmpeg = subprocess.run(["ffmpeg", "-y", "-i", sys.argv[2], "-map", "0:v", "-c:v", "copy", "-map", "0:a", "-c:a", "copy", "-map", "0:s", "-c:s", "copy", sys.argv[2][:-3]+"mp4"], capture_output=True, text=True)
+                print(ffmpeg.stdout)
 
 def command_version():
     print(version)
@@ -44,6 +48,11 @@ def command_help():
     print("")
     print("backup <path_to_dvd>")
     print("uses the programm dvdbackup")
+    print("")
+    print("convert <path_to_single_video>")
+    print("uses the programm ffmpeg")
+    print("gets all audio tracks and subtitle tracks - both without descriptions")
+
 
 def command_check_dependencies():
     print("You do not need every dependency to run the toolkit: ")
@@ -55,7 +64,7 @@ def command_check_dependencies():
         print("backup")
     if which("ffmpeg"):
         print("ffmpeg is found. Available commands are:")
-        print("convert (not yet implemented)")
+        print("convert")
 
 def determine_command(command):
     match command:

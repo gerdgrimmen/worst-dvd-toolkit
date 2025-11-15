@@ -50,6 +50,8 @@ ex. Gerd Grimmen (F.KU)
 
 ## Version History
 
+* 0.3
+    * added command convert to convert a single target video with audio tracks and subtitles - no descriptions for each yet
 * 0.2
     * added command backup to copy a dvd in a given drive
 * 0.1
