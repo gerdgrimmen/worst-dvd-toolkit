@@ -2,7 +2,7 @@ import subprocess
 import sys
 from shutil import which
 
-version = "0.1.0"
+version = "0.2.0"
 
 def arguments_guard():
     if len(sys.argv) < 2:
@@ -24,6 +24,10 @@ def check_arguments_structure(command):
             if command_guard("info", 3):
                 lsdvd = subprocess.run(["lsdvd", sys.argv[2]], capture_output=True, text=True)
                 print(lsdvd.stdout)
+        case "backup":
+            if command_guard("backup", 3):
+                dvdbackup = subprocess.run(["dvdbackup","-i", sys.argv[2], "-M", "-p"], capture_output=True, text=True)
+                print(dvdbackup.stdout)
 
 def command_version():
     print(version)
@@ -37,6 +41,9 @@ def command_help():
     print("Commands:")
     print("info <path_to_dvd>")
     print("uses the programm lsdvd")
+    print("")
+    print("backup <path_to_dvd>")
+    print("uses the programm dvdbackup")
 
 def command_check_dependencies():
     print("You do not need every dependency to run the toolkit: ")
@@ -45,7 +52,7 @@ def command_check_dependencies():
         print("info")
     if which("dvdbackup"):
         print("dvdbackup is found. Available commands are:")
-        print("backup (not yet implemented)")
+        print("backup")
     if which("ffmpeg"):
         print("ffmpeg is found. Available commands are:")
         print("convert (not yet implemented)")
@@ -60,6 +67,8 @@ def determine_command(command):
             command_check_dependencies()
         case "info":
             check_arguments_structure("info")
+        case "backup":
+            check_arguments_structure("backup")
 
 if __name__ == "__main__":
     arguments_guard()
